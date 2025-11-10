@@ -17,10 +17,10 @@ namespace DrivingSchoolApi.Services
     {
         private readonly IConfiguration _configuration;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly DBContextHRsystem _dbContext;
+        private readonly DrivingSchoolDbContext _dbContext;
 
         // ✅ FIX: Constructor parameter name was incorrect
-        public JwtService(IConfiguration configuration, RoleManager<ApplicationRole> roleManager, DBContextHRsystem dbContext)
+        public JwtService(IConfiguration configuration, RoleManager<ApplicationRole> roleManager, DrivingSchoolDbContext dbContext)
         {
             _configuration = configuration;
             _roleManager = roleManager;

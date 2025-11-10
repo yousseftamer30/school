@@ -1,4 +1,5 @@
-﻿using DrivingSchoolApi.Database;
+﻿using DrivingSchool.Api.Features.LicenseTypes;
+using DrivingSchoolApi.Database;
 using DrivingSchoolApi.Database.Entities;
 using DrivingSchoolApi.Services;
 using DrivingSchoolApi.Services.Auth;
@@ -37,7 +38,7 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 });
 
 
-builder.Services.AddDbContext<DBContextHRsystem>(options =>
+builder.Services.AddDbContext<DrivingSchoolDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -54,7 +55,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
     options.Password.RequireNonAlphanumeric = false; // Require at least one special character (e.g., !@#$%)
     options.Password.RequiredUniqueChars = 2; // Require at least 4 unique characters
 })
-    .AddEntityFrameworkStores<DBContextHRsystem>()
+    .AddEntityFrameworkStores<DrivingSchoolDbContext>()
     .AddDefaultTokenProviders();
 
 
@@ -225,7 +226,12 @@ app.UseAuthorization();
 
 //builder.Services.AddControllers();
 
- 
+
+
+app.MapLicenseTypeEndpoints();
+
+app.Run();
+
 
 app.MapControllers();
 
