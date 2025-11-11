@@ -11,16 +11,16 @@ namespace DrivingSchoolApi.Features.CourseSessions.CreateCourseSession
         SessionType SessionType,
         decimal DurationHours,
         int InstructorId
-    ) : IRequest<CourseSession>;
+    ) : IRequest<TbCourseSession>;
 
-    public class Handler : IRequestHandler<CreateCourseSessionCommand, CourseSession>
+    public class Handler : IRequestHandler<CreateCourseSessionCommand, TbCourseSession>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<CourseSession> Handle(CreateCourseSessionCommand request, CancellationToken ct)
+        public async Task<TbCourseSession> Handle(CreateCourseSessionCommand request, CancellationToken ct)
         {
-            var entity = new CourseSession
+            var entity = new TbCourseSession
             {
                 SchoolId = request.SchoolId,
                 LicenseId = request.LicenseId,
@@ -29,7 +29,7 @@ namespace DrivingSchoolApi.Features.CourseSessions.CreateCourseSession
                 InstructorId = request.InstructorId
             };
 
-            _db.CourseSessions.Add(entity);
+            _db.TbCourseSessions.Add(entity);
             await _db.SaveChangesAsync(ct);
             return entity;
         }

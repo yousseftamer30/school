@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchoolApi.Features.SessionAttendances.GetOneSessionAttendance
 {
-    public record GetOneSessionAttendanceQuery(int Id) : IRequest<SessionAttendance>;
+    public record GetOneSessionAttendanceQuery(int Id) : IRequest<TbSessionAttendance>;
 
-    public class Handler : IRequestHandler<GetOneSessionAttendanceQuery, SessionAttendance>
+    public class Handler : IRequestHandler<GetOneSessionAttendanceQuery, TbSessionAttendance>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<SessionAttendance> Handle(GetOneSessionAttendanceQuery request, CancellationToken ct)
+        public async Task<TbSessionAttendance> Handle(GetOneSessionAttendanceQuery request, CancellationToken ct)
         {
-            return await _db.SessionAttendances
+            return await _db.TbSessionAttendances
                 .Include(sa => sa.CourseSession)
                 .Include(sa => sa.Reservation)
                 .FirstOrDefaultAsync(x => x.AttendanceId == request.Id, ct);

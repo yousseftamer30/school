@@ -22,7 +22,7 @@ namespace DrivingSchoolApi.Features.Reservations.UpdateReservation
 
         public async Task<bool> Handle(UpdateReservationCommand request, CancellationToken ct)
         {
-            var entity = await _db.Reservations.FirstOrDefaultAsync(x => x.ReservationId == request.ReservationId, ct);
+            var entity = await _db.TbReservations.FirstOrDefaultAsync(x => x.ReservationId == request.ReservationId, ct);
             if (entity == null) return false;
 
             entity.CustomerId = request.CustomerId;

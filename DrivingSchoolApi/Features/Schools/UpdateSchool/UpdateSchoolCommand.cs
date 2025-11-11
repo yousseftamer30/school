@@ -20,7 +20,7 @@ namespace DrivingSchool.Api.Features.Schools.UpdateSchool
 
         public async Task<bool> Handle(UpdateSchoolCommand request, CancellationToken ct)
         {
-            var entity = await _db.Schools.FirstOrDefaultAsync(x => x.SchoolId == request.Id, ct);
+            var entity = await _db.TbSchools.FirstOrDefaultAsync(x => x.SchoolId == request.Id, ct);
             if (entity == null) return false;
 
             entity.SchoolName = request.SchoolName;

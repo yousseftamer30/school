@@ -14,7 +14,7 @@ namespace DrivingSchool.Api.Features.Roles.UpdateRole
 
         public async Task<bool> Handle(UpdateRoleCommand request, CancellationToken ct)
         {
-            var entity = await _db.Roles.FirstOrDefaultAsync(x => x.RoleId == request.Id, ct);
+            var entity = await _db.TbRoles.FirstOrDefaultAsync(x => x.RoleId == request.Id, ct);
             if (entity == null) return false;
 
             entity.RoleName = request.RoleName;

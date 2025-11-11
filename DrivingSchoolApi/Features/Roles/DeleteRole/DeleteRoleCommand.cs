@@ -14,10 +14,10 @@ namespace DrivingSchool.Api.Features.Roles.DeleteRole
 
         public async Task<bool> Handle(DeleteRoleCommand request, CancellationToken ct)
         {
-            var entity = await _db.Roles.FirstOrDefaultAsync(x => x.RoleId == request.Id, ct);
+            var entity = await _db.TbRoles.FirstOrDefaultAsync(x => x.RoleId == request.Id, ct);
             if (entity == null) return false;
 
-            _db.Roles.Remove(entity);
+            _db.TbRoles.Remove(entity);
             await _db.SaveChangesAsync(ct);
             return true;
         }

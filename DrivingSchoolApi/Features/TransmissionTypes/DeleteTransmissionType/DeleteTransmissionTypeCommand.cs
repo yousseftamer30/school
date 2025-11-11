@@ -14,10 +14,10 @@ namespace DrivingSchool.Api.Features.TransmissionTypes.DeleteTransmissionType
 
         public async Task<bool> Handle(DeleteTransmissionTypeCommand request, CancellationToken ct)
         {
-            var entity = await _db.TransmissionTypes.FirstOrDefaultAsync(x => x.TransmissionTypeId == request.Id, ct);
+            var entity = await _db.TbTransmissionTypes.FirstOrDefaultAsync(x => x.TransmissionTypeId == request.Id, ct);
             if (entity == null) return false;
 
-            _db.TransmissionTypes.Remove(entity);
+            _db.TbTransmissionTypes.Remove(entity);
             await _db.SaveChangesAsync(ct);
             return true;
         }

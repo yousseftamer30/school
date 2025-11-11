@@ -9,16 +9,16 @@ namespace DrivingSchoolApi.Features.Customers.CreateCustomer
         string Phone,
         string NationalId,
         string Email
-    ) : IRequest<Customer>;
+    ) : IRequest<TbCustomer>;
 
-    public class Handler : IRequestHandler<CreateCustomerCommand, Customer>
+    public class Handler : IRequestHandler<CreateCustomerCommand, TbCustomer>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<Customer> Handle(CreateCustomerCommand request, CancellationToken ct)
+        public async Task<TbCustomer> Handle(CreateCustomerCommand request, CancellationToken ct)
         {
-            var entity = new Customer
+            var entity = new TbCustomer
             {
                 FullName = request.FullName,
                 Phone = request.Phone,
@@ -26,7 +26,7 @@ namespace DrivingSchoolApi.Features.Customers.CreateCustomer
                 Email = request.Email
             };
 
-            _db.Customers.Add(entity);
+            _db.TbCustomers.Add(entity);
             await _db.SaveChangesAsync(ct);
             return entity;
         }

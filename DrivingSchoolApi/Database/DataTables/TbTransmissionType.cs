@@ -9,7 +9,7 @@ namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_Transmission_Type")]
 
-public class TransmissionType
+public class TbTransmissionType
 {
     [Key]
     public int TransmissionTypeId { get; set; }
@@ -19,5 +19,5 @@ public class TransmissionType
     public string TransmissionTypeName { get; set; }
 
     // Navigation Properties
-    public virtual ICollection<Vehicle> Vehicles { get; set; }
+    public virtual ICollection<TbVehicle> Vehicles { get; set; }
 }

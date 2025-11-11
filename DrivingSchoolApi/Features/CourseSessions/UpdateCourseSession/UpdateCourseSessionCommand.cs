@@ -21,7 +21,7 @@ namespace DrivingSchoolApi.Features.CourseSessions.UpdateCourseSession
 
         public async Task<bool> Handle(UpdateCourseSessionCommand request, CancellationToken ct)
         {
-            var entity = await _db.CourseSessions.FirstOrDefaultAsync(x => x.SessionId == request.SessionId, ct);
+            var entity = await _db.TbCourseSessions.FirstOrDefaultAsync(x => x.SessionId == request.SessionId, ct);
             if (entity == null) return false;
 
             entity.SchoolId = request.SchoolId;

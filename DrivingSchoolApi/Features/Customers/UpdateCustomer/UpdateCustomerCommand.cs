@@ -19,7 +19,7 @@ namespace DrivingSchoolApi.Features.Customers.UpdateCustomer
 
         public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken ct)
         {
-            var entity = await _db.Customers.FirstOrDefaultAsync(x => x.CustomerId == request.CustomerId, ct);
+            var entity = await _db.TbCustomers.FirstOrDefaultAsync(x => x.CustomerId == request.CustomerId, ct);
             if (entity == null) return false;
 
             entity.FullName = request.FullName;

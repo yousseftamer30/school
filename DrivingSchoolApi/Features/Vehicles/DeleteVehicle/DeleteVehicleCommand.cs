@@ -15,10 +15,10 @@ namespace DrivingSchool.Api.Features.Vehicles.DeleteVehicle
 
         public async Task<bool> Handle(DeleteVehicleCommand request, CancellationToken ct)
         {
-            var entity = await _db.Vehicles.FirstOrDefaultAsync(x => x.VehicleId == request.Id, ct);
+            var entity = await _db.TbVehicles.FirstOrDefaultAsync(x => x.VehicleId == request.Id, ct);
             if (entity == null) return false;
 
-            _db.Vehicles.Remove(entity);
+            _db.TbVehicles.Remove(entity);
             await _db.SaveChangesAsync(ct);
             return true;
         }

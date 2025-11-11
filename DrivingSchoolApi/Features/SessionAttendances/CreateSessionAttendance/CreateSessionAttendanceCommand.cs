@@ -11,16 +11,16 @@ namespace DrivingSchoolApi.Features.SessionAttendances.CreateSessionAttendance
         DateTime AttendanceDate,
         AttendanceStatus AttendanceStatus,
         string Notes
-    ) : IRequest<SessionAttendance>;
+    ) : IRequest<TbSessionAttendance>;
 
-    public class Handler : IRequestHandler<CreateSessionAttendanceCommand, SessionAttendance>
+    public class Handler : IRequestHandler<CreateSessionAttendanceCommand, TbSessionAttendance>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<SessionAttendance> Handle(CreateSessionAttendanceCommand request, CancellationToken ct)
+        public async Task<TbSessionAttendance> Handle(CreateSessionAttendanceCommand request, CancellationToken ct)
         {
-            var entity = new SessionAttendance
+            var entity = new TbSessionAttendance
             {
                 SessionId = request.SessionId,
                 ReservationId = request.ReservationId,
@@ -29,7 +29,7 @@ namespace DrivingSchoolApi.Features.SessionAttendances.CreateSessionAttendance
                 Notes = request.Notes
             };
 
-            _db.SessionAttendances.Add(entity);
+            _db.TbSessionAttendances.Add(entity);
             await _db.SaveChangesAsync(ct);
             return entity;
         }

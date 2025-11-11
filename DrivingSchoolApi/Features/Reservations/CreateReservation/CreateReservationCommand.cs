@@ -12,16 +12,16 @@ namespace DrivingSchoolApi.Features.Reservations.CreateReservation
         DateTime ReservationDate,
         ReservationStatus Status,
         string Notes
-    ) : IRequest<Reservation>;
+    ) : IRequest<TbReservation>;
 
-    public class Handler : IRequestHandler<CreateReservationCommand, Reservation>
+    public class Handler : IRequestHandler<CreateReservationCommand, TbReservation>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<Reservation> Handle(CreateReservationCommand request, CancellationToken ct)
+        public async Task<TbReservation> Handle(CreateReservationCommand request, CancellationToken ct)
         {
-            var entity = new Reservation
+            var entity = new TbReservation
             {
                 CustomerId = request.CustomerId,
                 LicenseId = request.LicenseId,
@@ -31,7 +31,7 @@ namespace DrivingSchoolApi.Features.Reservations.CreateReservation
                 Notes = request.Notes
             };
 
-            _db.Reservations.Add(entity);
+            _db.TbReservations.Add(entity);
             await _db.SaveChangesAsync(ct);
             return entity;
         }

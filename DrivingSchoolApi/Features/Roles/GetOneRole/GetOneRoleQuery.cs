@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchool.Api.Features.Roles.GetOneRole
 {
-    public record GetOneRoleQuery(int Id) : IRequest<Role?>;
+    public record GetOneRoleQuery(int Id) : IRequest<TbRole?>;
 
-    public class Handler : IRequestHandler<GetOneRoleQuery, Role?>
+    public class Handler : IRequestHandler<GetOneRoleQuery, TbRole?>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<Role?> Handle(GetOneRoleQuery request, CancellationToken ct)
+        public async Task<TbRole?> Handle(GetOneRoleQuery request, CancellationToken ct)
         {
-            return await _db.Roles.AsNoTracking().FirstOrDefaultAsync(x => x.RoleId == request.Id, ct);
+            return await _db.TbRoles.AsNoTracking().FirstOrDefaultAsync(x => x.RoleId == request.Id, ct);
         }
     }
 }

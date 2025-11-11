@@ -13,10 +13,10 @@ namespace DrivingSchoolApi.Features.CourseSessions.DeleteCourseSession
 
         public async Task<bool> Handle(DeleteCourseSessionCommand request, CancellationToken ct)
         {
-            var entity = await _db.CourseSessions.FirstOrDefaultAsync(x => x.SessionId == request.SessionId, ct);
+            var entity = await _db.TbCourseSessions.FirstOrDefaultAsync(x => x.SessionId == request.SessionId, ct);
             if (entity == null) return false;
 
-            _db.CourseSessions.Remove(entity);
+            _db.TbCourseSessions.Remove(entity);
             await _db.SaveChangesAsync(ct);
             return true;
         }

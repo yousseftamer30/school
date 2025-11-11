@@ -8,7 +8,7 @@ using static DrivingSchoolApi.Enums.EnumsList;
 namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_Session_Attendance")]
-public class SessionAttendance
+public class TbSessionAttendance
 {
     [Key]
     public int AttendanceId { get; set; }
@@ -30,8 +30,8 @@ public class SessionAttendance
 
     // Navigation Properties
     [ForeignKey(nameof(SessionId))]
-    public virtual CourseSession CourseSession { get; set; }
+    public virtual TbCourseSession CourseSession { get; set; }
 
     [ForeignKey(nameof(ReservationId))]
-    public virtual Reservation Reservation { get; set; }
+    public virtual TbReservation Reservation { get; set; }
 }

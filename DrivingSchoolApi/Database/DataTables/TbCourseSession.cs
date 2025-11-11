@@ -10,7 +10,7 @@ namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_Course_Session")]
 
-public class CourseSession
+public class TbCourseSession
 {
     [Key]
     public int SessionId { get; set; }
@@ -33,13 +33,13 @@ public class CourseSession
 
     // Navigation Properties
     [ForeignKey(nameof(SchoolId))]
-    public virtual School School { get; set; }
+    public virtual TbSchool School { get; set; }
 
     [ForeignKey(nameof(LicenseId))]
-    public virtual LicenseType LicenseType { get; set; }
+    public virtual TbLicenseType LicenseType { get; set; }
 
     [ForeignKey(nameof(InstructorId))]
-    public virtual Employee Instructor { get; set; }
+    public virtual TbEmployee Instructor { get; set; }
 
-    public virtual ICollection<SessionAttendance> SessionAttendances { get; set; }
+    public virtual ICollection<TbSessionAttendance> SessionAttendances { get; set; }
 }

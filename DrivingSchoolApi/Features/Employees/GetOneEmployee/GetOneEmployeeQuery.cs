@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchoolApi.Features.Employees.GetOneEmployee
 {
-    public record GetOneEmployeeQuery(int EmployeeId) : IRequest<Employee>;
+    public record GetOneEmployeeQuery(int EmployeeId) : IRequest<TbEmployee>;
 
-    public class Handler : IRequestHandler<GetOneEmployeeQuery, Employee>
+    public class Handler : IRequestHandler<GetOneEmployeeQuery, TbEmployee>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<Employee> Handle(GetOneEmployeeQuery request, CancellationToken ct)
+        public async Task<TbEmployee> Handle(GetOneEmployeeQuery request, CancellationToken ct)
         {
-            return await _db.Employees
+            return await _db.TbEmployees
                 .Include(e => e.School)
                 .Include(e => e.Role)
                 .FirstOrDefaultAsync(x => x.EmployeeId == request.EmployeeId, ct);

@@ -9,7 +9,7 @@ namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_Employee_License_Expertise")]
 
-public class EmployeeLicenseExpertise
+public class TbEmployeeLicenseExpertise
 {
     [Key]
     public int ExpertiseId { get; set; }
@@ -28,8 +28,8 @@ public class EmployeeLicenseExpertise
 
     // Navigation Properties
     [ForeignKey(nameof(EmployeeId))]
-    public virtual Employee Employee { get; set; }
+    public virtual TbEmployee Employee { get; set; }
 
     [ForeignKey(nameof(LicenseId))]
-    public virtual LicenseType LicenseType { get; set; }
+    public virtual TbLicenseType LicenseType { get; set; }
 }

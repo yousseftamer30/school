@@ -10,16 +10,16 @@ namespace DrivingSchoolApi.Features.Employees.CreateEmployee
         int SchoolId,
         int RoleId,
         bool IsActive
-    ) : IRequest<Employee>;
+    ) : IRequest<TbEmployee>;
 
-    public class Handler : IRequestHandler<CreateEmployeeCommand, Employee>
+    public class Handler : IRequestHandler<CreateEmployeeCommand, TbEmployee>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<Employee> Handle(CreateEmployeeCommand request, CancellationToken ct)
+        public async Task<TbEmployee> Handle(CreateEmployeeCommand request, CancellationToken ct)
         {
-            var entity = new Employee
+            var entity = new TbEmployee
             {
                 EmployeeName = request.EmployeeName,
                 SchoolId = request.SchoolId,
@@ -27,7 +27,7 @@ namespace DrivingSchoolApi.Features.Employees.CreateEmployee
                 IsActive = request.IsActive
             };
 
-            _db.Employees.Add(entity);
+            _db.TbEmployees.Add(entity);
             await _db.SaveChangesAsync(ct);
             return entity;
         }

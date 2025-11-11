@@ -14,7 +14,7 @@ namespace DrivingSchool.Api.Features.TransmissionTypes.UpdateTransmissionType
 
         public async Task<bool> Handle(UpdateTransmissionTypeCommand request, CancellationToken ct)
         {
-            var entity = await _db.TransmissionTypes.FirstOrDefaultAsync(x => x.TransmissionTypeId == request.Id, ct);
+            var entity = await _db.TbTransmissionTypes.FirstOrDefaultAsync(x => x.TransmissionTypeId == request.Id, ct);
             if (entity == null) return false;
 
             entity.TransmissionTypeName = request.TransmissionTypeName;

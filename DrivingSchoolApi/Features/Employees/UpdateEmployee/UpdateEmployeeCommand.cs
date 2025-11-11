@@ -19,7 +19,7 @@ namespace DrivingSchoolApi.Features.Employees.UpdateEmployee
 
         public async Task<bool> Handle(UpdateEmployeeCommand request, CancellationToken ct)
         {
-            var entity = await _db.Employees.FirstOrDefaultAsync(x => x.EmployeeId == request.EmployeeId, ct);
+            var entity = await _db.TbEmployees.FirstOrDefaultAsync(x => x.EmployeeId == request.EmployeeId, ct);
             if (entity == null) return false;
 
             entity.EmployeeName = request.EmployeeName;

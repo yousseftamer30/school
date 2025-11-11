@@ -9,7 +9,7 @@ namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_Role")]
 
-public class Role
+public class TbRole
 {
     [Key]
     public int RoleId { get; set; }
@@ -19,5 +19,5 @@ public class Role
     public string RoleName { get; set; }
 
     // Navigation Properties
-    public virtual ICollection<Employee> Employees { get; set; }
+    public virtual ICollection<TbEmployee> Employees { get; set; }
 }

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_School")]
-public class School
+public class TbSchool
 {
     [Key]
     public int SchoolId { get; set; }
@@ -29,8 +29,8 @@ public class School
     public int TotalCapacity => TotalLectureHalls * SeatsPerHall;
 
     // Navigation Properties
-    public virtual ICollection<Employee> Employees { get; set; }
-    public virtual ICollection<Vehicle> Vehicles { get; set; }
-    public virtual ICollection<Reservation> Reservations { get; set; }
-    public virtual ICollection<CourseSession> CourseSessions { get; set; }
+    public virtual ICollection<TbEmployee> Employees { get; set; }
+    public virtual ICollection<TbVehicle> Vehicles { get; set; }
+    public virtual ICollection<TbReservation> Reservations { get; set; }
+    public virtual ICollection<TbCourseSession> CourseSessions { get; set; }
 }

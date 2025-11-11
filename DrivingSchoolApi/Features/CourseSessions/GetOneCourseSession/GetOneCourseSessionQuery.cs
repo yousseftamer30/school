@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchoolApi.Features.CourseSessions.GetOneCourseSession
 {
-    public record GetOneCourseSessionQuery(int SessionId) : IRequest<CourseSession>;
+    public record GetOneCourseSessionQuery(int SessionId) : IRequest<TbCourseSession>;
 
-    public class Handler : IRequestHandler<GetOneCourseSessionQuery, CourseSession>
+    public class Handler : IRequestHandler<GetOneCourseSessionQuery, TbCourseSession>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<CourseSession> Handle(GetOneCourseSessionQuery request, CancellationToken ct)
+        public async Task<TbCourseSession> Handle(GetOneCourseSessionQuery request, CancellationToken ct)
         {
-            return await _db.CourseSessions
+            return await _db.TbCourseSessions
                 .Include(cs => cs.School)
                 .Include(cs => cs.LicenseType)
                 .Include(cs => cs.Instructor)

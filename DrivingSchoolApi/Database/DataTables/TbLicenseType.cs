@@ -9,7 +9,7 @@ namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_License_Type")]
 
-public class LicenseType
+public class TbLicenseType
 {
     [Key]
     public int LicenseId { get; set; }
@@ -22,8 +22,8 @@ public class LicenseType
     public string Description { get; set; }
 
     // Navigation Properties
-    public virtual ICollection<Reservation> Reservations { get; set; }
-    public virtual ICollection<Vehicle> Vehicles { get; set; }
-    public virtual ICollection<CourseSession> CourseSessions { get; set; }
-    public virtual ICollection<EmployeeLicenseExpertise> EmployeeExpertises { get; set; }
+    public virtual ICollection<TbReservation> Reservations { get; set; }
+    public virtual ICollection<TbVehicle> Vehicles { get; set; }
+    public virtual ICollection<TbCourseSession> CourseSessions { get; set; }
+    public virtual ICollection<TbEmployeeLicenseExpertise> EmployeeExpertises { get; set; }
 }

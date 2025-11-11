@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchoolApi.Features.Reservations.GetOneReservation
 {
-    public record GetOneReservationQuery(int ReservationId) : IRequest<Reservation>;
+    public record GetOneReservationQuery(int ReservationId) : IRequest<TbReservation>;
 
-    public class Handler : IRequestHandler<GetOneReservationQuery, Reservation>
+    public class Handler : IRequestHandler<GetOneReservationQuery, TbReservation>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<Reservation> Handle(GetOneReservationQuery request, CancellationToken ct)
+        public async Task<TbReservation> Handle(GetOneReservationQuery request, CancellationToken ct)
         {
-            return await _db.Reservations
+            return await _db.TbReservations
                 .Include(r => r.Customer)
                 .Include(r => r.LicenseType)
                 .Include(r => r.School)

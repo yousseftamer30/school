@@ -20,7 +20,7 @@ namespace DrivingSchoolApi.Features.EmployeeLicenseExpertises.UpdateEmployeeLice
 
         public async Task<bool> Handle(UpdateEmployeeLicenseExpertiseCommand request, CancellationToken ct)
         {
-            var entity = await _db.EmployeeLicenseExpertises.FirstOrDefaultAsync(x => x.ExpertiseId == request.ExpertiseId, ct);
+            var entity = await _db.TbEmployeeLicenseExpertises.FirstOrDefaultAsync(x => x.ExpertiseId == request.ExpertiseId, ct);
             if (entity == null) return false;
 
             entity.EmployeeId = request.EmployeeId;

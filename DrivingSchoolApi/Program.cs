@@ -38,12 +38,20 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 });
 
 
+//builder.Services.AddDbContext<DrivingSchoolDbContext>(options =>
+//    options.UseMySql(
+//        builder.Configuration.GetConnectionString("DefaultConnection"),
+//        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+//    ));
+
+
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
+
 builder.Services.AddDbContext<DrivingSchoolDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+        serverVersion
     ));
-
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {

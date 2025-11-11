@@ -12,16 +12,16 @@ namespace DrivingSchool.Api.Features.Vehicles.CreateVehicle
         int LicenseId,
         bool HasControlPedals,
         string? Notes
-    ) : IRequest<Vehicle>;
+    ) : IRequest<TbVehicle>;
 
-    public class Handler : IRequestHandler<CreateVehicleCommand, Vehicle>
+    public class Handler : IRequestHandler<CreateVehicleCommand, TbVehicle>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<Vehicle> Handle(CreateVehicleCommand request, CancellationToken ct)
+        public async Task<TbVehicle> Handle(CreateVehicleCommand request, CancellationToken ct)
         {
-            var entity = new Vehicle
+            var entity = new TbVehicle
             {
                 PlateNumber = request.PlateNumber,
                 SchoolId = request.SchoolId,
@@ -31,7 +31,7 @@ namespace DrivingSchool.Api.Features.Vehicles.CreateVehicle
                 Notes = request.Notes
             };
 
-            _db.Vehicles.Add(entity);
+            _db.TbVehicles.Add(entity);
             await _db.SaveChangesAsync(ct);
             return entity;
         }

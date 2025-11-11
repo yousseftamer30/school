@@ -13,10 +13,10 @@ namespace DrivingSchoolApi.Features.Customers.DeleteCustomer
 
         public async Task<bool> Handle(DeleteCustomerCommand request, CancellationToken ct)
         {
-            var entity = await _db.Customers.FirstOrDefaultAsync(x => x.CustomerId == request.CustomerId, ct);
+            var entity = await _db.TbCustomers.FirstOrDefaultAsync(x => x.CustomerId == request.CustomerId, ct);
             if (entity == null) return false;
 
-            _db.Customers.Remove(entity);
+            _db.TbCustomers.Remove(entity);
             await _db.SaveChangesAsync(ct);
             return true;
         }

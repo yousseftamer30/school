@@ -10,16 +10,16 @@ namespace DrivingSchoolApi.Features.EmployeeLicenseExpertises.CreateEmployeeLice
         bool CanTeachTheory,
         bool CanTeachPractical,
         DateTime? CertificationDate
-    ) : IRequest<EmployeeLicenseExpertise>;
+    ) : IRequest<TbEmployeeLicenseExpertise>;
 
-    public class Handler : IRequestHandler<CreateEmployeeLicenseExpertiseCommand, EmployeeLicenseExpertise>
+    public class Handler : IRequestHandler<CreateEmployeeLicenseExpertiseCommand, TbEmployeeLicenseExpertise>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<EmployeeLicenseExpertise> Handle(CreateEmployeeLicenseExpertiseCommand request, CancellationToken ct)
+        public async Task<TbEmployeeLicenseExpertise> Handle(CreateEmployeeLicenseExpertiseCommand request, CancellationToken ct)
         {
-            var entity = new EmployeeLicenseExpertise
+            var entity = new TbEmployeeLicenseExpertise
             {
                 EmployeeId = request.EmployeeId,
                 LicenseId = request.LicenseId,
@@ -28,7 +28,7 @@ namespace DrivingSchoolApi.Features.EmployeeLicenseExpertises.CreateEmployeeLice
                 CertificationDate = request.CertificationDate
             };
 
-            _db.EmployeeLicenseExpertises.Add(entity);
+            _db.TbEmployeeLicenseExpertises.Add(entity);
             await _db.SaveChangesAsync(ct);
             return entity;
         }

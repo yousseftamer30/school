@@ -21,7 +21,7 @@ namespace DrivingSchoolApi.Features.SessionAttendances.UpdateSessionAttendance
 
         public async Task<bool> Handle(UpdateSessionAttendanceCommand request, CancellationToken ct)
         {
-            var entity = await _db.SessionAttendances.FirstOrDefaultAsync(x => x.AttendanceId == request.AttendanceId, ct);
+            var entity = await _db.TbSessionAttendances.FirstOrDefaultAsync(x => x.AttendanceId == request.AttendanceId, ct);
             if (entity == null) return false;
 
             entity.SessionId = request.SessionId;

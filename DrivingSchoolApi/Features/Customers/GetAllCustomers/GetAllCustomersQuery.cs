@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchoolApi.Features.Customers.GetAllCustomers
 {
-    public record GetAllCustomersQuery() : IRequest<List<Customer>>;
+    public record GetAllCustomersQuery() : IRequest<List<TbCustomer>>;
 
-    public class Handler : IRequestHandler<GetAllCustomersQuery, List<Customer>>
+    public class Handler : IRequestHandler<GetAllCustomersQuery, List<TbCustomer>>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<List<Customer>> Handle(GetAllCustomersQuery request, CancellationToken ct)
+        public async Task<List<TbCustomer>> Handle(GetAllCustomersQuery request, CancellationToken ct)
         {
-            return await _db.Customers
+            return await _db.TbCustomers
                 .Include(c => c.Reservations)
                 .ToListAsync(ct);
         }

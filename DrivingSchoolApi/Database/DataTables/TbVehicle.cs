@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_Vehicle")]
-public class Vehicle
+public class TbVehicle
 {
     [Key]
     public int VehicleId { get; set; }
@@ -33,11 +33,11 @@ public class Vehicle
 
     // Navigation Properties
     [ForeignKey(nameof(SchoolId))]
-    public virtual School School { get; set; }
+    public virtual TbSchool School { get; set; }
 
     [ForeignKey(nameof(TransmissionId))]
-    public virtual TransmissionType TransmissionType { get; set; }
+    public virtual TbTransmissionType TransmissionType { get; set; }
 
     [ForeignKey(nameof(LicenseId))]
-    public virtual LicenseType LicenseType { get; set; }
+    public virtual TbLicenseType LicenseType { get; set; }
 }

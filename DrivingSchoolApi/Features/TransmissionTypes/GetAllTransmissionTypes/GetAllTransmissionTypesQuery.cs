@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchool.Api.Features.TransmissionTypes.GetAllTransmissionTypes
 {
-    public record GetAllTransmissionTypesQuery() : IRequest<List<TransmissionType>>;
+    public record GetAllTransmissionTypesQuery() : IRequest<List<TbTransmissionType>>;
 
-    public class Handler : IRequestHandler<GetAllTransmissionTypesQuery, List<TransmissionType>>
+    public class Handler : IRequestHandler<GetAllTransmissionTypesQuery, List<TbTransmissionType>>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<List<TransmissionType>> Handle(GetAllTransmissionTypesQuery request, CancellationToken ct)
+        public async Task<List<TbTransmissionType>> Handle(GetAllTransmissionTypesQuery request, CancellationToken ct)
         {
-            return await _db.TransmissionTypes.AsNoTracking().ToListAsync(ct);
+            return await _db.TbTransmissionTypes.AsNoTracking().ToListAsync(ct);
         }
     }
 }

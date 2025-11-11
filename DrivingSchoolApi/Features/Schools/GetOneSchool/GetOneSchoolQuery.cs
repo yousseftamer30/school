@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchool.Api.Features.Schools.GetOneSchool
 {
-    public record GetOneSchoolQuery(int Id) : IRequest<School?>;
+    public record GetOneSchoolQuery(int Id) : IRequest<TbSchool?>;
 
-    public class Handler : IRequestHandler<GetOneSchoolQuery, School?>
+    public class Handler : IRequestHandler<GetOneSchoolQuery, TbSchool?>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<School?> Handle(GetOneSchoolQuery request, CancellationToken ct)
+        public async Task<TbSchool?> Handle(GetOneSchoolQuery request, CancellationToken ct)
         {
-            return await _db.Schools
+            return await _db.TbSchools
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.SchoolId == request.Id, ct);
         }

@@ -23,7 +23,7 @@ namespace DrivingSchool.Api.Features.Vehicles.UpdateVehicle
 
         public async Task<bool> Handle(UpdateVehicleCommand request, CancellationToken ct)
         {
-            var entity = await _db.Vehicles.FirstOrDefaultAsync(x => x.VehicleId == request.VehicleId, ct);
+            var entity = await _db.TbVehicles.FirstOrDefaultAsync(x => x.VehicleId == request.VehicleId, ct);
             if (entity == null) return false;
 
             entity.PlateNumber = request.PlateNumber;

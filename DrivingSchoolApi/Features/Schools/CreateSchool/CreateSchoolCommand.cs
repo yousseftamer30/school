@@ -10,16 +10,16 @@ namespace DrivingSchool.Api.Features.Schools.CreateSchool
         string? Location,
         int TotalLectureHalls,
         int SeatsPerHall
-    ) : IRequest<School>;
+    ) : IRequest<TbSchool>;
 
-    public class Handler : IRequestHandler<CreateSchoolCommand, School>
+    public class Handler : IRequestHandler<CreateSchoolCommand, TbSchool>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<School> Handle(CreateSchoolCommand request, CancellationToken ct)
+        public async Task<TbSchool> Handle(CreateSchoolCommand request, CancellationToken ct)
         {
-            var entity = new School
+            var entity = new TbSchool
             {
                 SchoolName = request.SchoolName,
                 Location = request.Location,
@@ -27,7 +27,7 @@ namespace DrivingSchool.Api.Features.Schools.CreateSchool
                 SeatsPerHall = request.SeatsPerHall
             };
 
-            _db.Schools.Add(entity);
+            _db.TbSchools.Add(entity);
             await _db.SaveChangesAsync(ct);
             return entity;
         }

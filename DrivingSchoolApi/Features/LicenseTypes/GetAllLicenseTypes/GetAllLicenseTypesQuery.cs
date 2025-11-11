@@ -21,7 +21,7 @@ namespace DrivingSchool.Api.Features.LicenseTypes.GetAllLicenseTypes
 
         public async Task<List<LicenseTypeDto>> Handle(GetAllLicenseTypesQuery request, CancellationToken ct)
         {
-            return await _db.LicenseTypes.AsNoTracking()
+            return await _db.TbLicenseTypes.AsNoTracking()
                 .Select(x => new LicenseTypeDto
                 {
                     LicenseId = x.LicenseId,

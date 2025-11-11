@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrivingSchool.Api.Features.Vehicles.GetAllVehicles
 {
-    public record GetAllVehiclesQuery() : IRequest<List<Vehicle>>;
+    public record GetAllVehiclesQuery() : IRequest<List<TbVehicle>>;
 
-    public class Handler : IRequestHandler<GetAllVehiclesQuery, List<Vehicle>>
+    public class Handler : IRequestHandler<GetAllVehiclesQuery, List<TbVehicle>>
     {
         private readonly DrivingSchoolDbContext _db;
         public Handler(DrivingSchoolDbContext db) => _db = db;
 
-        public async Task<List<Vehicle>> Handle(GetAllVehiclesQuery request, CancellationToken ct)
+        public async Task<List<TbVehicle>> Handle(GetAllVehiclesQuery request, CancellationToken ct)
         {
-            return await _db.Vehicles
+            return await _db.TbVehicles
                 .Include(x => x.LicenseType)
                 .Include(x => x.TransmissionType)
                 .Include(x => x.School)

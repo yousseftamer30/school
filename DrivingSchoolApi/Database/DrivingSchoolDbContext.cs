@@ -18,17 +18,17 @@ public class DrivingSchoolDbContext : IdentityDbContext<ApplicationUser, Applica
     {
     }
     // DbSets
-    public DbSet<School> Schools { get; set; }
-    public DbSet<LicenseType> LicenseTypes { get; set; }
-    public DbSet<Role> Roles { get; set; }
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<TransmissionType> TransmissionTypes { get; set; }
-    public DbSet<Vehicle> Vehicles { get; set; }
-    public DbSet<Customer> Customers { get; set; }
-    public DbSet<Reservation> Reservations { get; set; }
-    public DbSet<CourseSession> CourseSessions { get; set; }
-    public DbSet<SessionAttendance> SessionAttendances { get; set; }
-    public DbSet<EmployeeLicenseExpertise> EmployeeLicenseExpertises { get; set; }
+    public DbSet<TbSchool> TbSchools { get; set; }
+    public DbSet<TbLicenseType> TbLicenseTypes { get; set; }
+    public DbSet<TbRole> TbRoles { get; set; }
+    public DbSet<TbEmployee> TbEmployees { get; set; }
+    public DbSet<TbTransmissionType> TbTransmissionTypes { get; set; }
+    public DbSet<TbVehicle> TbVehicles { get; set; }
+    public DbSet<TbCustomer> TbCustomers { get; set; }
+    public DbSet<TbReservation> TbReservations { get; set; }
+    public DbSet<TbCourseSession> TbCourseSessions { get; set; }
+    public DbSet<TbSessionAttendance> TbSessionAttendances { get; set; }
+    public DbSet<TbEmployeeLicenseExpertise> TbEmployeeLicenseExpertises { get; set; }
 
     public virtual DbSet<AspPermission> AspPermissions { get; set; }
     public virtual DbSet<AspRolePermissions> AspRolePermissions { get; set; }
@@ -93,134 +93,134 @@ public class DrivingSchoolDbContext : IdentityDbContext<ApplicationUser, Applica
         // ==================== INDEXES ====================
 
         // Unique Constraints
-        modelBuilder.Entity<Vehicle>()
+        modelBuilder.Entity<TbVehicle>()
             .HasIndex(v => v.PlateNumber)
             .IsUnique();
 
-        modelBuilder.Entity<Customer>()
+        modelBuilder.Entity<TbCustomer>()
             .HasIndex(c => c.Phone)
             .IsUnique();
 
-        modelBuilder.Entity<Customer>()
+        modelBuilder.Entity<TbCustomer>()
             .HasIndex(c => c.NationalId)
             .IsUnique();
 
         // Composite Index for Employee Expertise (prevent duplicates)
-        modelBuilder.Entity<EmployeeLicenseExpertise>()
+        modelBuilder.Entity<TbEmployeeLicenseExpertise>()
             .HasIndex(e => new { e.EmployeeId, e.LicenseId })
             .IsUnique();
 
         // Performance Indexes
-        modelBuilder.Entity<Reservation>()
+        modelBuilder.Entity<TbReservation>()
             .HasIndex(r => new { r.CustomerId, r.Status });
 
-        modelBuilder.Entity<Reservation>()
+        modelBuilder.Entity<TbReservation>()
             .HasIndex(r => new { r.SchoolId, r.LicenseId });
 
-        modelBuilder.Entity<CourseSession>()
+        modelBuilder.Entity<TbCourseSession>()
             .HasIndex(cs => new { cs.SchoolId, cs.LicenseId, cs.SessionType });
 
-        modelBuilder.Entity<SessionAttendance>()
+        modelBuilder.Entity<TbSessionAttendance>()
             .HasIndex(sa => new { sa.ReservationId, sa.AttendanceDate });
 
         // ==================== RELATIONSHIPS ====================
 
         // School -> Employees (1:M)
-        modelBuilder.Entity<Employee>()
+        modelBuilder.Entity<TbEmployee>()
             .HasOne(e => e.School)
             .WithMany(s => s.Employees)
             .HasForeignKey(e => e.SchoolId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // Role -> Employees (1:M)
-        modelBuilder.Entity<Employee>()
+        modelBuilder.Entity<TbEmployee>()
             .HasOne(e => e.Role)
             .WithMany(r => r.Employees)
             .HasForeignKey(e => e.RoleId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // School -> Vehicles (1:M)
-        modelBuilder.Entity<Vehicle>()
+        modelBuilder.Entity<TbVehicle>()
             .HasOne(v => v.School)
             .WithMany(s => s.Vehicles)
             .HasForeignKey(v => v.SchoolId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // TransmissionType -> Vehicles (1:M)
-        modelBuilder.Entity<Vehicle>()
+        modelBuilder.Entity<TbVehicle>()
             .HasOne(v => v.TransmissionType)
             .WithMany(t => t.Vehicles)
             .HasForeignKey(v => v.TransmissionId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // LicenseType -> Vehicles (1:M)
-        modelBuilder.Entity<Vehicle>()
+        modelBuilder.Entity<TbVehicle>()
             .HasOne(v => v.LicenseType)
             .WithMany(l => l.Vehicles)
             .HasForeignKey(v => v.LicenseId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // Customer -> Reservations (1:M)
-        modelBuilder.Entity<Reservation>()
+        modelBuilder.Entity<TbReservation>()
             .HasOne(r => r.Customer)
             .WithMany(c => c.Reservations)
             .HasForeignKey(r => r.CustomerId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // LicenseType -> Reservations (1:M)
-        modelBuilder.Entity<Reservation>()
+        modelBuilder.Entity<TbReservation>()
             .HasOne(r => r.LicenseType)
             .WithMany(l => l.Reservations)
             .HasForeignKey(r => r.LicenseId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // School -> Reservations (1:M)
-        modelBuilder.Entity<Reservation>()
+        modelBuilder.Entity<TbReservation>()
             .HasOne(r => r.School)
             .WithMany(s => s.Reservations)
             .HasForeignKey(r => r.SchoolId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // CourseSession Relationships
-        modelBuilder.Entity<CourseSession>()
+        modelBuilder.Entity<TbCourseSession>()
             .HasOne(cs => cs.School)
             .WithMany(s => s.CourseSessions)
             .HasForeignKey(cs => cs.SchoolId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<CourseSession>()
+        modelBuilder.Entity<TbCourseSession>()
             .HasOne(cs => cs.LicenseType)
             .WithMany(l => l.CourseSessions)
             .HasForeignKey(cs => cs.LicenseId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<CourseSession>()
+        modelBuilder.Entity<TbCourseSession>()
             .HasOne(cs => cs.Instructor)
             .WithMany(e => e.CourseSessions)
             .HasForeignKey(cs => cs.InstructorId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // SessionAttendance Relationships
-        modelBuilder.Entity<SessionAttendance>()
+        modelBuilder.Entity<TbSessionAttendance>()
             .HasOne(sa => sa.CourseSession)
             .WithMany(cs => cs.SessionAttendances)
             .HasForeignKey(sa => sa.SessionId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<SessionAttendance>()
+        modelBuilder.Entity<TbSessionAttendance>()
             .HasOne(sa => sa.Reservation)
             .WithMany(r => r.SessionAttendances)
             .HasForeignKey(sa => sa.ReservationId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // EmployeeLicenseExpertise Relationships
-        modelBuilder.Entity<EmployeeLicenseExpertise>()
+        modelBuilder.Entity<TbEmployeeLicenseExpertise>()
             .HasOne(ele => ele.Employee)
             .WithMany(e => e.LicenseExpertises)
             .HasForeignKey(ele => ele.EmployeeId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<EmployeeLicenseExpertise>()
+        modelBuilder.Entity<TbEmployeeLicenseExpertise>()
             .HasOne(ele => ele.LicenseType)
             .WithMany(l => l.EmployeeExpertises)
             .HasForeignKey(ele => ele.LicenseId)
@@ -228,11 +228,16 @@ public class DrivingSchoolDbContext : IdentityDbContext<ApplicationUser, Applica
 
         // ==================== DEFAULT VALUES ====================
 
-        modelBuilder.Entity<Reservation>()
-            .Property(r => r.ReservationDate)
-            .HasDefaultValueSql("GETDATE()");
+        //modelBuilder.Entity<TbReservation>()
+        //    .Property(r => r.ReservationDate)
+        //    .HasDefaultValueSql("GETDATE()");
 
-        modelBuilder.Entity<Employee>()
+        // في OnModelCreating، غير السطر ده:
+        modelBuilder.Entity<TbReservation>()
+            .Property(r => r.ReservationDate)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        modelBuilder.Entity<TbEmployee>()
             .Property(e => e.IsActive)
             .HasDefaultValue(true);
     }

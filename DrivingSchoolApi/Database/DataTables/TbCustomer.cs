@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DrivingSchoolApi.Database.DataTables;
 
 [Table("Tb_Customer")]
-public class Customer
+public class TbCustomer
 {
     [Key]
     public int CustomerId { get; set; }
@@ -29,5 +29,5 @@ public class Customer
     public string Email { get; set; }
 
     // Navigation Properties
-    public virtual ICollection<Reservation> Reservations { get; set; }
+    public virtual ICollection<TbReservation> Reservations { get; set; }
 }

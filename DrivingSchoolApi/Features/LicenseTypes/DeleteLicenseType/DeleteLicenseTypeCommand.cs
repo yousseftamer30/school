@@ -13,10 +13,10 @@ namespace DrivingSchool.Api.Features.LicenseTypes.DeleteLicenseType
 
         public async Task<bool> Handle(DeleteLicenseTypeCommand request, CancellationToken ct)
         {
-            var entity = await _db.LicenseTypes.FirstOrDefaultAsync(x => x.LicenseId == request.Id, ct);
+            var entity = await _db.TbLicenseTypes.FirstOrDefaultAsync(x => x.LicenseId == request.Id, ct);
             if (entity == null) return false;
 
-            _db.LicenseTypes.Remove(entity);
+            _db.TbLicenseTypes.Remove(entity);
             await _db.SaveChangesAsync(ct);
             return true;
         }

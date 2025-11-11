@@ -13,7 +13,7 @@ namespace DrivingSchool.Api.Features.LicenseTypes.UpdateLicenseType
 
         public async Task<bool> Handle(UpdateLicenseTypeCommand request, CancellationToken ct)
         {
-            var entity = await _db.LicenseTypes.FirstOrDefaultAsync(x => x.LicenseId == request.Id, ct);
+            var entity = await _db.TbLicenseTypes.FirstOrDefaultAsync(x => x.LicenseId == request.Id, ct);
             if (entity == null) return false;
 
             entity.LicenseName = request.LicenseName;

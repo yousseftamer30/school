@@ -14,10 +14,10 @@ namespace DrivingSchoolApi.Features.Reservations.DeleteReservation
 
         public async Task<bool> Handle(DeleteReservationCommand request, CancellationToken ct)
         {
-            var entity = await _db.Reservations.FirstOrDefaultAsync(x => x.ReservationId == request.ReservationId, ct);
+            var entity = await _db.TbReservations.FirstOrDefaultAsync(x => x.ReservationId == request.ReservationId, ct);
             if (entity == null) return false;
 
-            _db.Reservations.Remove(entity);
+            _db.TbReservations.Remove(entity);
             await _db.SaveChangesAsync(ct);
             return true;
         }
