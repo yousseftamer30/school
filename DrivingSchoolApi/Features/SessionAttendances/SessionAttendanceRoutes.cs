@@ -1,7 +1,7 @@
 ﻿using DrivingSchoolApi.Features.SessionAttendance;
 using MediatR;
 
-namespace DrivingSchoolApi.Features.SessionAttendances
+namespace DrivingSchoolApi.Features.CallCenterReservation
 {
     public static class SessionAttendanceRoutes
     {

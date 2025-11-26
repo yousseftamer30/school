@@ -5,14 +5,18 @@ using DrivingSchool.Api.Features.TransmissionTypes;
 using DrivingSchool.Api.Features.Vehicles;
 using DrivingSchoolApi.Database;
 using DrivingSchoolApi.Database.Entities;
+using DrivingSchoolApi.Features.CallCenterReservation;
 using DrivingSchoolApi.Features.CourseSessions;
 using DrivingSchoolApi.Features.Customers;
 using DrivingSchoolApi.Features.EmployeeLicenseExpertises;
 using DrivingSchoolApi.Features.Employees;
+using DrivingSchoolApi.Features.Enrollment;
+using DrivingSchoolApi.Features.Instructors;
 using DrivingSchoolApi.Features.LicenseGroup;
 using DrivingSchoolApi.Features.LicenseGroupMembers;
 using DrivingSchoolApi.Features.Payments;
 using DrivingSchoolApi.Features.Reservations;
+using DrivingSchoolApi.Features.SchoolOperatingHours;
 using DrivingSchoolApi.Features.SessionAttendances;
 using DrivingSchoolApi.Features.TrafficUnit;
 using DrivingSchoolApi.Services;
@@ -21,6 +25,7 @@ using DrivingSchoolApi.Services.CurrentUser;
 using DrivingSchoolApi.Shared.EncryptText;
 using DrivingSchoolApi.Shared.ValidationHandler;
 using FluentValidation;
+using HRsystem.Api.Features.Organization.Govermenet;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -256,25 +261,27 @@ app.MapTransmissionTypeEndpoints();
 app.MapTrafficUnit();
 app.MapSessionAttendanceEndpoints();
 app.MapSchoolEndpoints();
+app.MapSchoolOperatingHoursEndpoints();
 app.MapRoleEndpoints();
 app.MapReservationEndpoints();
 app.MapPayment();
 app.MapLicenseTypeEndpoints();
 app.MapLicenseGroupMember();
 app.MapLicenseGroup();
+app.MapGovEndpoints();
 app.MapEmployeeEndpoints();
 app.MapEmployeeLicenseExpertiseEndpoints();
 app.MapCustomerEndpoints();
 app.MapCourseSessionEndpoints();
 
-
-
-app.Run();
-
+app.MapEnrollmentEndpoints();
+app.MapSessionAttendanceAfterReservationEndpoints();
+app.MapSchoolOperatingHoursReservationEndpoints();
+app.MapInstructorEndpoints();
 
 app.MapControllers();
 
- app.Run();
+app.Run();
 
 
 

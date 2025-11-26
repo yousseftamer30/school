@@ -56,7 +56,8 @@ namespace DrivingSchoolApi.Features.CallCenterReservation
                         sl.IsAvailable
                     )
                 })
-                .Where(s => s.CurrentEnrollments < s.TotalCapacity) // فقط المدارس اللي فيها مكان
+                ///***////
+                //.Where(s => s.CurrentEnrollments < s.TotalCapacity) // فقط المدارس اللي فيها مكان
                 .OrderBy(s => s.GovName)
                 .ThenBy(s => s.SchoolName)
                 .ToListAsync(ct);

@@ -6,7 +6,7 @@ using static DrivingSchoolApi.Enums.EnumsList;
 
 namespace DrivingSchoolApi.Features.CallCenterReservation
 {
-    public record CreateReservationCommand : IRequest<ReservationCreatedDto>
+    public record CreateEnrollmentReservationCommand : IRequest<ReservationCreatedDto>
     {
         public int PaymentId { get; init; }
         public int SchoolId { get; init; }
@@ -14,16 +14,16 @@ namespace DrivingSchoolApi.Features.CallCenterReservation
     }
 
     // HANDLER
-    public class CreateReservationHandler : IRequestHandler<CreateReservationCommand, ReservationCreatedDto>
+    public class CreateEnrollmentReservationHandler : IRequestHandler<CreateEnrollmentReservationCommand, ReservationCreatedDto>
     {
         private readonly DrivingSchoolDbContext _context;
 
-        public CreateReservationHandler(DrivingSchoolDbContext context)
+        public CreateEnrollmentReservationHandler(DrivingSchoolDbContext context)
         {
             _context = context;
         }
 
-        public async Task<ReservationCreatedDto> Handle(CreateReservationCommand request, CancellationToken ct)
+        public async Task<ReservationCreatedDto> Handle(CreateEnrollmentReservationCommand request, CancellationToken ct)
         {
             // 1.Get Datepayment
             var payment = await _context.TbPayments
