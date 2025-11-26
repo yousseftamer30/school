@@ -1,0 +1,36 @@
+@page
+@model DrivingSchoolFrontend.Pages.Schools.IndexModel
+@{
+    ViewData["Title"] = "Schools";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Schools</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var school in Model.Schools)
+                            {
+                                <tr>
+                                    <td>@school.Id</td>
+                                    <td>@school.Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
