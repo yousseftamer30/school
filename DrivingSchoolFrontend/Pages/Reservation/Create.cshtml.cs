@@ -32,11 +32,8 @@ namespace DrivingSchoolFrontend.Pages.Reservation
         public string SelectedTimeSlot { get; set; }
 
 
-        public void OnGet()
+        private void InitializePage()
         {
-            // TODO: Call API to get customer and payment details based on NationalId and PhoneNumber.
-            // TODO: Call API to get available schools based on the license type from payment details.
-
             // Dummy data for now:
             CustomerName = "John Doe";
             PaymentId = "PAY12345";
@@ -49,10 +46,20 @@ namespace DrivingSchoolFrontend.Pages.Reservation
             };
         }
 
+        public void OnGet()
+        {
+            // TODO: Call API to get customer and payment details based on NationalId and PhoneNumber.
+            // TODO: Call API to get available schools based on the license type from payment details.
+
+            InitializePage();
+        }
+
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
+                // Re-initialize page data to avoid a NullReferenceException on the re-rendered page.
+                InitializePage();
                 return Page();
             }
 
