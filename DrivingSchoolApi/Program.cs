@@ -279,6 +279,7 @@ app.MapSessionAttendanceAfterReservationEndpoints();
 app.MapSchoolOperatingHoursReservationEndpoints();
 app.MapInstructorEndpoints();
 
+
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
