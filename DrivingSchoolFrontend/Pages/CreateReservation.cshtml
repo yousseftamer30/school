@@ -1,0 +1,24 @@
+@page
+@model CreateReservationModel
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+
+<h2>Create Reservation</h2>
+
+@if (Model.ReservationCreated)
+{
+    <div class="alert alert-success" role="alert">
+        Reservation created successfully!
+    </div>
+}
+else
+{
+    <form method="post">
+        <input type="hidden" asp-for="PaymentId" />
+        <input type="hidden" asp-for="SchoolId" />
+        <input type="hidden" asp-for="InstructorId" />
+        <p>Are you sure you want to create a reservation with the selected school and instructor?</p>
+        <button type="submit" class="btn btn-primary">Create Reservation</button>
+    </form>
+}

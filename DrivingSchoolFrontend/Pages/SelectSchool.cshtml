@@ -1,0 +1,88 @@
+@page
+@model SelectSchoolModel
+@{
+    ViewData["Title"] = "Select School";
+}
+
+<h2>Select School</h2>
+
+<form method="get">
+    <div class="form-group">
+        <label for="gov">Filter by Governorate</label>
+        <input type="text" class="form-control" id="gov" name="gov" />
+    </div>
+    <input type="hidden" name="licenseId" value="@Model.LicenseId" />
+    <input type="hidden" name="paymentId" value="@Model.PaymentId" />
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<h3>Available Schools</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Governorate</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var school in Model.Schools)
+        {
+            <tr>
+                <td>@school.Name</td>
+                <td>@school.Governorate</td>
+                <td>
+                    <a asp-page="./SelectSchool" asp-route-licenseId="@Model.LicenseId" asp-route-paymentId="@Model.PaymentId" asp-route-schoolId="@school.SchoolId">Select</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.WorkingHours.Any())
+{
+    <h3>Working Hours</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var workingHour in Model.WorkingHours)
+            {
+                <tr>
+                    <td>@workingHour.Day</td>
+                    <td>@workingHour.From</td>
+                    <td>@workingHour.To</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (Model.Instructors.Any())
+{
+    <h3>Available Instructors</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var instructor in Model.Instructors)
+            {
+                <tr>
+                    <td>@instructor.Name</td>
+                    <td>
+                        <a asp-page="./CreateReservation" asp-route-paymentId="@Model.PaymentId" asp-route-schoolId="@Model.SchoolId" asp-route-instructorId="@instructor.Id">Select</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
